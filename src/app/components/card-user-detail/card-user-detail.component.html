@@ -1,0 +1,23 @@
+<mat-card class="card">
+    <mat-card-header>
+
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="container-detail-user">
+        <img class="card-detail-image" src={{userDetail.picture}} alt="image">
+        <div class="p-text">
+          <h1>{{userDetail.title}}.{{userDetail.firstName}}{{userDetail.lastName}}</h1>
+          <h1><b>Gender:</b> {{userDetail.gender}}</h1>
+          <h1><b>Date Of Birth:</b> {{userDetail.dateOfBirth | date}}</h1>
+          <h1><b>Register Date:</b> {{userDetail.registerDate | date}}</h1>
+          <h1><b>Email:</b> {{userDetail.email}}</h1>
+          <h1><b>Phone:</b> {{userDetail.phone}}</h1>
+          <h1><b>Address:</b> {{userDetail.location.country}},{{userDetail.location.state}},{{userDetail.location.city}}{{userDetail.location.street}}</h1>
+        </div>
+      </div>
+      <mat-card-actions class="card-action">
+        <button class="view-post" (click)="showUserPosts()" mat-button>View Posts</button>
+    </mat-card-actions>
+    </mat-card-content>
+  </mat-card>

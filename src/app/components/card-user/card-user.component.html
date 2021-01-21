@@ -1,0 +1,18 @@
+<mat-card class="card mat-elevation-z4">
+    <mat-card-header>
+
+    </mat-card-header>
+    <img mat-card-image src={{user.picture}} alt="image">
+    <mat-card-content>
+      <hr>
+    <h3>{{user.firstName + " " + user.lastName}}</h3>
+    <p>
+      Email: {{user.email}}
+    </p>
+      <hr>
+      <mat-card-actions>
+        <button class="view-post" (click)="showUserPosts()" mat-button>View Posts</button>
+        <button class="show-profile"(click)="showUserProfile()" mat-button>Show Profile</button>
+    </mat-card-actions>
+    </mat-card-content>
+  </mat-card>

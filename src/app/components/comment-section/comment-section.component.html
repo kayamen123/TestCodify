@@ -1,0 +1,17 @@
+<mat-card class="card">
+    <mat-card-header>
+    <div (click)="showUserProfile(comment.owner.id)" mat-card-avatar class="card-header-image" style="background-image: url({{comment.owner.picture}});
+      background-size: cover;"></div>
+      <mat-card-title (click)=chooseUser(comment.owner.id)>{{comment.owner.firstName + " " + comment.owner.lastName}}       
+      </mat-card-title>
+      <mat-card-subtitle class="card-email" (click)=chooseUser(comment.owner.id)>{{comment.owner.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <hr>
+      <p>
+        {{comment.message}}
+      </p>
+      <h5>{{this.publishDate}}</h5>    
+      <hr>
+    </mat-card-content>
+  </mat-card>

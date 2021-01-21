@@ -1,0 +1,43 @@
+<mat-card class="card">
+    <mat-card-header>
+    <div (click)="showUserProfile(post.owner.id)" mat-card-avatar class="card-header-image" style="background-image: url({{post.owner.picture}});
+      background-size: cover;"></div>
+      <mat-card-title (click)="showUserProfile(post.owner.id)">{{post.owner.firstName + " " + post.owner.lastName}}       
+      </mat-card-title>
+      <mat-card-subtitle class="card-email" (click)="showUserProfile(post.owner.id)">{{post.owner.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src={{post.image}} alt="image">
+    <mat-card-content>
+      <hr>
+      <mat-chip-list aria-label="tags" style="margin-bottom: 5px;">
+        <mat-chip  color="primary" selected *ngFor="let tag of post.tags" (click)=chooseCategory(tag.title)>
+          {{tag.title}}
+        </mat-chip>
+        <hr>
+      </mat-chip-list>
+      <div style="margin-top: 5px;">
+        <h3 class="likes">  <mat-icon style="font-size: inherit;"  aria-hidden="false" class="like-icon"  aria-label="heart">favorite</mat-icon>
+          {{post.likes + " people likes this"}}</h3>
+          <mat-divider [inset]="true"></mat-divider>
+      </div>
+      <p>
+        {{post.text}}
+      </p>
+      <a href="{{post.link}}"> {{post.link}}</a>
+      <h5>{{this.publishDate}}</h5>    
+      <hr>
+        <mat-card-actions>
+        <button  class="button-show-comment" mat-stroked-button  (click)="showComments()"><mat-icon style="font-size: inherit;"  
+          aria-hidden="false" class="comment-icon" aria-label="comment">question_answer</mat-icon>
+          View Comments</button>
+        <mat-divider [inset]="true"></mat-divider>
+        <div *ngIf="isLoadingComment" class="content-comment-loading">
+          <mat-progress-spinner style="color: blue;" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+        <div *ngIf="!isLoadingComment && showComment" class="comment-section" >
+          <app-comment-section  (userClicked)="onUserClicked($event)" *ngFor="let comment of comments" [comment]="comment"></app-comment-section>
+        </div>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
