@@ -13,15 +13,13 @@
           <a class="nav-link" routerLink="/user-list-component" routerLinkActive="active">User List</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" routerLink="/user-component" routerLinkActive="active" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                User
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" routerLink="/user-list-component" routerLinkActive="active">List</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>      
+          <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Tag
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a *ngFor ="let tag of newTag" class="dropdown-item" (click)="onClickTag(tag.title)" >{{tag.title}}</a>
+          </div>
+        </li>   
       </ul>
     </div>
   </nav>

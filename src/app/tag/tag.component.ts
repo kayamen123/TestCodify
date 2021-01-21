@@ -120,5 +120,5 @@ export class TagComponent implements OnInit {
     this.pages = 0;
     window.scroll(0,0);
     this.router.navigate(['', this.tag, "tags"]);
-}
+  }
 }

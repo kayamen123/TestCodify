@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Tag } from 'src/app/models/tag.model';
 import { User } from 'src/app/models/user.model';
 import { DummyServiceService } from 'src/app/service/dummy-service.service';
 
@@ -11,6 +12,10 @@ import { DummyServiceService } from 'src/app/service/dummy-service.service';
 export class UserListComponent implements OnInit {
 
   newUser:User[] = [];
+  
+  newTag: Tag[] = [];
+  tag:string = "";
+  prevTag : string = "";
   isRequestingData:boolean = true;
   category:string = "";
   userId:string | null = '';
@@ -37,4 +42,10 @@ export class UserListComponent implements OnInit {
         });
     });
   }
+
+  onClickTag(tag:string){
+    window.scroll(0,0);
+    this.router.navigate(['', tag, "tags"]);
+  }
+
 }

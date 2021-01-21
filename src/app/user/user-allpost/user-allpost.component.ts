@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Tag } from 'src/app/models/tag.model';
 import { Post } from '../../models/post.model';
 import { DummyServiceService } from '../../service/dummy-service.service';
 
@@ -11,6 +12,9 @@ import { DummyServiceService } from '../../service/dummy-service.service';
 export class UserAllpostComponent implements OnInit {
 
   newPost:Post[] = [];
+  newTag: Tag[] = [];
+  tag:string = "";
+  prevTag : string = "";
   isRequestingData:boolean = true;
   category:string = "";
   prevCategory : string = "";
@@ -32,6 +36,7 @@ export class UserAllpostComponent implements OnInit {
     )
     console.log(this.userId);
     this.getUserPostList();
+    this.getTagList();
   }
   @HostListener("window:scroll", ["$event"])
   onWindowScroll() {
@@ -82,11 +87,36 @@ export class UserAllpostComponent implements OnInit {
     }
   }
 
+  
+  getTagList(){
+    this.DummyService.getTagPost()// resp is of type `HttpResponse<Config>`
+    .subscribe(resp => {
+      const body = { ... resp.body };
+      let tagList = body.data;
+      console.log(tagList);
+      if(tagList.length < 1){
+        this.doneRequest=true;
+      }else{
+        tagList.forEach((element: any) => {
+          let stat = new Tag(element);
+          this.newTag.push(stat);
+          });
+      }
+      console.log(this.newTag);
+    });
+  }
+
+  onClickTag(tag:string){
+    window.scroll(0,0);
+    this.router.navigate(['', tag, "tags"]);
+  }
+
   onCategoryClicked($event:string){
-    this.category = $event;
-    console.log($event);
-    localStorage.setItem('category', this.category);
-    console.log(localStorage.getItem('category'));
+    this.tag = $event;
+    this.newPost = [];
+    this.pages = 0;
+    window.scroll(0,0);
+    this.router.navigate(['', this.tag, "tags"]);
   }
 
 }

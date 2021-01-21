@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Tag } from 'src/app/models/tag.model';
 import { User } from 'src/app/models/user.model';
 import { DummyServiceService } from 'src/app/service/dummy-service.service';
 
@@ -10,6 +11,10 @@ import { DummyServiceService } from 'src/app/service/dummy-service.service';
 })
 export class UserDetailComponent implements OnInit {
 
+  newTag: Tag[] = [];
+  tag:string = "";
+  doneRequest:boolean = false;
+  prevTag : string = "";
     isLoading:boolean = true;
   userId:string | null = '';
   userDetail: User = new User;
@@ -27,6 +32,7 @@ export class UserDetailComponent implements OnInit {
     )
     console.log(this.userId);
     this.getUserDetail();
+    this.getTagList();
   }
 
   getUserDetail(){
@@ -38,8 +44,33 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  
+  getTagList(){
+    this.DummyService.getTagPost()// resp is of type `HttpResponse<Config>`
+    .subscribe(resp => {
+      const body = { ... resp.body };
+      let tagList = body.data;
+      console.log(tagList);
+      if(tagList.length < 1){
+        this.doneRequest=true;
+      }else{
+        tagList.forEach((element: any) => {
+          let stat = new Tag(element);
+          this.newTag.push(stat);
+          });
+      }
+      console.log(this.newTag);
+    });
+  }
+
   showUserPosts(){
     window.scroll(0,0);
     this.router.navigate(['', this.userId ,"posts"]);
   }
+
+  onClickTag(tag:string){
+    window.scroll(0,0);
+    this.router.navigate(['', tag, "tags"]);
+  }
+
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
