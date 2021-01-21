@@ -29,6 +29,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getTagList();
   }
 
   getAllUsers(){
@@ -43,6 +44,24 @@ export class UserListComponent implements OnInit {
     });
   }
 
+
+  getTagList(){
+    this.DummyService.getTagPost()// resp is of type `HttpResponse<Config>`
+    .subscribe(resp => {
+      const body = { ... resp.body };
+      let tagList = body.data;
+      console.log(tagList);
+      if(tagList.length < 1){
+        this.doneRequest=true;
+      }else{
+        tagList.forEach((element: any) => {
+          let stat = new Tag(element);
+          this.newTag.push(stat);
+          });
+      }
+      console.log(this.newTag);
+    });
+  }
   onClickTag(tag:string){
     window.scroll(0,0);
     this.router.navigate(['', tag, "tags"]);
