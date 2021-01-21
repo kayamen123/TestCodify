@@ -7,9 +7,9 @@ import { UserAllpostComponent } from './user/user-allpost/user-allpost.component
 import { TagComponent } from './tag/tag.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home-component' , pathMatch: 'full'},
-  { path: 'home-component', component: HomeComponent },
-  { path: 'user-list-component', component: UserListComponent},
+  { path: '', redirectTo: 'home' , pathMatch: 'full'},
+  { path: 'home', component: HomeComponent },
+  { path: 'user-list', component: UserListComponent},
   { path: ':id', component: UserDetailComponent },
   { path: ':id/posts', component: UserAllpostComponent },
   { path: ':id/tags' , component: TagComponent}
