@@ -9,7 +9,7 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class DummyServiceService {
 
-  baseUrl = "https://dummyapi.io/data/api/";
+  baseUrl = "https://dummyapi.io/data/v1/";
 
   header = "6009643a4690c077b896852c"
 
